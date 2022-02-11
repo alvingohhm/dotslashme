@@ -57,7 +57,7 @@ const EditSkill = () => {
           </button>
         </div>
       </div>
-      <div class="divider"></div>
+      <div className="divider"></div>
       {SkillLists}
     </div>
   );

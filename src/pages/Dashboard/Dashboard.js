@@ -3,6 +3,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import EditSkill from "./EditSkill";
+import Resume from "./Resume";
 
 const Dashboard = () => {
   return (
@@ -20,6 +21,7 @@ const Dashboard = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/skill/edit" element={<EditSkill />} />
+            <Route path="/resume" element={<Resume />} />
           </Routes>
 
           {/* for other component */}
@@ -37,6 +39,9 @@ const Dashboard = () => {
             </li>
             <li>
               <Link to="/dashboard/skill/edit">Edit Skill</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/resume">My Resume</Link>
             </li>
           </ul>
         </div>

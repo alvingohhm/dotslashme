@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
   const [skills, setSkills] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState("");
+  const [defaultResume, setDefaultResume] = useState([]);
 
   const { accessToken, setAccessToken } = useContext(AuthHandlerContext);
 
@@ -22,7 +23,7 @@ export const UserProvider = ({ children }) => {
         `${baseUrl}/api/users/profile`,
         accessToken
       );
-      console.log(response);
+
       if ("process" in response) {
         const { process } = response;
         if (process === "failed") {
@@ -36,7 +37,6 @@ export const UserProvider = ({ children }) => {
 
       if (data) {
         const user = data[0];
-        console.log(user);
         setUser({ ...user, user });
       }
     } catch (error) {
@@ -64,10 +64,10 @@ export const UserProvider = ({ children }) => {
       }
 
       const { data } = response;
+      console.log(data);
 
       if (data) {
         const summary = data[0];
-        console.log(summary);
         setSummary(summary);
       }
     } catch (error) {
@@ -98,7 +98,6 @@ export const UserProvider = ({ children }) => {
 
       if (data) {
         const skills = data[0];
-        console.log(skills);
         setSkills(skills);
       }
     } catch (error) {
@@ -130,7 +129,6 @@ export const UserProvider = ({ children }) => {
       const { data } = response;
       if (data) {
         const user = data[0];
-        console.log(user);
         setUser({ ...user, user });
       }
     } catch (error) {
@@ -215,6 +213,32 @@ export const UserProvider = ({ children }) => {
     setIsLoading(false);
   };
 
+  const getResume = async () => {
+    setErr("");
+    try {
+      const response = await axiosExec.get(
+        `${baseUrl}/api/users/resume`,
+        accessToken
+      );
+      console.log(response);
+      if ("process" in response) {
+        const { process } = response;
+        if (process === "failed") {
+          console.log("process failed");
+          setErr(response.message);
+          return;
+        }
+      }
+
+      const { data } = response;
+
+      if (data) {
+        const resume = data[0];
+        setDefaultResume(resume);
+      }
+    } catch (error) {}
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -227,6 +251,8 @@ export const UserProvider = ({ children }) => {
         getSkills,
         deleteSkill,
         addSkill,
+        getResume,
+        defaultResume,
         err,
       }}
     >

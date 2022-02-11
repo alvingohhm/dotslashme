@@ -41,7 +41,7 @@ const EditProfile = () => {
 
   return (
     <div className="w-full mx-auto lg:w-9/12">
-      <div class="grid grid-cols-2 rounded-box">
+      <div className="grid grid-cols-2 rounded-box">
         <div className="bg-base-100 px-4 pt-2">
           <div className="form-control">
             <label className="label">
